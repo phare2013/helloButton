@@ -10,7 +10,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private nativeAudio: NativeAudio) {
 
-  this.nativeAudio.preloadSimple('testingAudio', 'assetsh/snd/test.wave').then(this.onSuccess, this.onError);
+  this.nativeAudio.preloadSimple('testingAudio', 'assets/snd/test.mp3').then(this.onSuccess, this.onError);
 
   }
 
