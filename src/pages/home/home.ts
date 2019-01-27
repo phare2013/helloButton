@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,25 +24,32 @@ export class HomePage {
   buttonClick(){
     console.log("button clicked");
     this.buttonImage = this.buttonDownImg;
-    this.nativeAudio.play('testingAudio').then(this.onClickSuccess, this.onClickError);
+    setTimeout(()=> 
+    {
+      this.nativeAudio.play('testingAudio').then(
+        //success
+        ()=>{
+          console.log("Button Click Success");
+          this.buttonImage = this.buttonUpImg;
+        }
+        , 
+        //error
+        ()=>{
+            console.log("Button Click Error");
+            this.buttonImage = this.buttonUpImg;
+            });
+    }, 50);
+
   }
 
   onCtorSuccess(){
     console.log("success: constructor");
   }
 
-  onClickSuccess(){
-    console.log("success: click");
-//    this.buttonImage = this.buttonUpImg;
-  }
-
   onCtorError(){
     console.log("error: constructor");
   }
 
-  onClickError(){
-    console.log("error: click");
-    this.buttonImage = this.buttonUpImg;
-  }
+  
 
 }
