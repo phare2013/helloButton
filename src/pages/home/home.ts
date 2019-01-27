@@ -9,31 +9,38 @@ import { NativeAudio } from '@ionic-native/native-audio';
 
 export class HomePage {
 
-  public buttonUp:string = "assets/imgs/red_button_up.png";
-  public buttonDown:string = "assets/imgs/red_button_down.png";
-  public picTheView:string = this.buttonUp;
+  public buttonUpImg:string = "assets/imgs/red_button_up.png";
+  public buttonDownImg:string = "assets/imgs/red_button_down.png";
+  public buttonSoundSnd:string = "assets/snd/test.mp3";
+
+  public buttonImage:string = this.buttonUpImg;
 
   constructor(public navCtrl: NavController, private nativeAudio: NativeAudio) {
-
-  this.nativeAudio.preloadSimple('testingAudio', 'assets/snd/test.mp3').then(this.onSuccess, this.onError);
-
+    this.nativeAudio.preloadSimple('testingAudio', this.buttonSoundSnd).then(this.onCtorSuccess, this.onCtorError);
   }
 
- buttonClick(){
-   console.log("button clicked");
-   this.picTheView = this.buttonDown;
-   this.nativeAudio.play('testingAudio').then(this.onSuccess, this.onError);
-
- }
-
-  onSuccess(){
-    console.log("ran success");
-    this.picTheView = this.buttonUp;
+  buttonClick(){
+    console.log("button clicked");
+    this.buttonImage = this.buttonDownImg;
+    this.nativeAudio.play('testingAudio').then(this.onClickSuccess, this.onClickError);
   }
 
-  onError(){
-    console.log("ran error");
-    this.picTheView = this.buttonUp;
+  onCtorSuccess(){
+    console.log("success: constructor");
+  }
+
+  onClickSuccess(){
+    console.log("success: click");
+//    this.buttonImage = this.buttonUpImg;
+  }
+
+  onCtorError(){
+    console.log("error: constructor");
+  }
+
+  onClickError(){
+    console.log("error: click");
+    this.buttonImage = this.buttonUpImg;
   }
 
 }
